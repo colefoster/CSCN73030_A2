@@ -12,7 +12,8 @@
 
 using namespace std;
 
-void parse() {
+int main()
+{
     struct STUDENT_DATA {
         string last;
         string first;
@@ -21,20 +22,23 @@ void parse() {
     vector<STUDENT_DATA> studentVector;
 
     ifstream studentDataFile("StudentData.txt");
-    if (studentDataFile.is_open()) 
+    if (studentDataFile.is_open())
     {
         string line;
-        while (getline(studentDataFile, line)) 
+        while (getline(studentDataFile, line))
         {
             tempStudent.last = line.substr(0, line.find(","));
             tempStudent.first = line.substr(line.find(",") + 1, line.length());
             studentVector.push_back(tempStudent);
         }
     }
-}
 
-int main()
-{
-    parse();
+    #ifdef _DEBUG
+    cout << "Printing Student Data (First, Last):" << endl;
+    for (int i = 0; i < studentVector.size(); i++) {
+        cout << studentVector.at(i).first << ", " << studentVector.at(i).last << endl;
+    }
+    #endif // _DEBUG
+
     return 1;
 }
